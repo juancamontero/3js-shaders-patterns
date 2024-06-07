@@ -1,4 +1,28 @@
-void main()
-{
-    gl_FragColor = vec4(0.5, 0.0, 1.0, 1.0);
+varying vec2 vUv;
+
+void main() {
+    // gl_FragColor = vec4(vUv, 1.0, 1.0); //pattern 1
+    // gl_FragColor = vec4(vUv, 0.5, 1.0);// pattern 2
+
+    // Pattern 3
+    // float strength = vUv.x;
+    // float strength = vUv.y; // Pattern 4
+    // float strength = (1.0 - vUv.y); // Pattern 5
+    // float strength =  vUv.y * 10.0; // Pattern 6
+    // float strength =  mod(vUv.y * 10.0, 1.0); // Pattern 7
+    // float strength = mod(vUv.y * 10.0, 1.0);  // Pattern 8
+    // // strength = strength < 0.5 ? 0.0 : 1.0; // !not recomended// Pattern 8
+    // strength = step(0.5, strength);// Pattern 8
+    // float strength = mod(vUv.y * 10.0, 1.0);  // Pattern 9
+    // strength = step(0.8, strength); // Pattern 9
+
+    // Pattern 10
+    // float strength = mod(vUv.x * 10.0, 1.0);  
+    // strength = step(0.8, strength); 
+    
+    // Pattern 11
+    float strength = step(0.8, mod(vUv.x * 10.0, 1.0)); 
+    strength += step(0.8, mod(vUv.y * 10.0, 1.0)); 
+
+    gl_FragColor = vec4(vec3(strength), 1.0);
 }
